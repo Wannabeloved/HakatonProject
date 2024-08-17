@@ -1,12 +1,18 @@
 import { Menu } from "./core/menu";
 
 import { ClicksModule } from "./modules/clicks.module";
+import { CountdownTimer } from "./modules/countdownTimer.module";
 
 const modules = [
   {
     type: "clicks-module",
     text: "Считать клики (за 3 секунды)",
     module: ClicksModule,
+  },
+  {
+    type: "timer-module",
+    text: "Таймер",
+    module: CountdownTimer,
   },
 ];
 
