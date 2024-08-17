@@ -1,28 +1,67 @@
 import { Menu } from "./core/menu";
 
+import { ClicksModule } from "./modules/clicks.module";
+import { CountdownTimer } from "./modules/countdownTimer.module";
+
+const modules = [
+  {
+    type: "clicks-module",
+    text: "Считать клики (за 3 секунды)",
+    module: ClicksModule,
+  },
+  {
+    type: "timer-module",
+    text: "Таймер",
+    module: CountdownTimer,
+  },
+];
+
 export class ContextMenu extends Menu {
-  constructor(selector, modules) {
+  constructor(selector) {
     super(selector);
     this.selector = selector;
+
+    modules.forEach(item => {
+      this.add(item);
+    });
+
+    this.el.addEventListener("click", event => {
+      this[event.target.dataset.type].trigger();
+    });
   }
 
-  open() {
-    console.log(this.selector);
+  open(coordinates) {
+    let width = this.el.offsetWidth;
+    this.el.classList.remove("open");
+
+    let { x: currentX, y: currentY } = coordinates;
+    const maximalX = window.innerWidth - width; // Так как я всё-равно не могу отображать меню поверх чего-то вроде девтулзов, то отслеживаем не ширину окна а ширину документа
+
+    this.el.offsetWidth;
+
+    if (currentX > maximalX) {
+      currentX = maximalX;
+    }
+    if (currentY < window.innerHeight / 2) {
+      this.el.style.top = `${currentY}px`;
+      this.el.style.bottom = "auto";
+    } else {
+      this.el.style.bottom = `${window.innerHeight - coordinates.y}px`;
+      this.el.style.top = "auto";
+    }
+
+    this.el.style.left = `${currentX}px`;
     this.el.classList.add("open");
-    console.log(this.el);
   }
 
-  // close() {
-  //   throw new Error(`"close" method should be implemented in Menu"`);
-  // }
+  close() {
+    this.el.classList.remove("open");
+  }
 
   add(item) {
-    let menuItem = document.createElement("li");
-    menuItem.textContent = item.module.text;
-    menuItem.classList.add("menu-item");
-    menuItem.addEventListener("click", () => {
-      item.module.trigger();
-    });
-    this.el.appendChild(menuItem);
+
+    this[item.type] = new item.module(item.type, item.text);
+    this.el.insertAdjacentHTML("beforeend", this[item.type].toHTML());
+
   }
 }
