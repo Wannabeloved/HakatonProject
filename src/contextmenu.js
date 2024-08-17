@@ -2,6 +2,7 @@ import { Menu } from "./core/menu";
 
 import { ClicksModule } from "./modules/clicks.module";
 import { CountdownTimer } from "./modules/countdownTimer.module";
+import { BackgroundModule } from "./modules/background.module";
 
 const modules = [
   {
@@ -13,6 +14,11 @@ const modules = [
     type: "timer-module",
     text: "Таймер",
     module: CountdownTimer,
+  },
+  {
+    type: "background-module",
+    text: "Случайный фон",
+    module: BackgroundModule,
   },
 ];
 
@@ -59,9 +65,7 @@ export class ContextMenu extends Menu {
   }
 
   add(item) {
-
     this[item.type] = new item.module(item.type, item.text);
     this.el.insertAdjacentHTML("beforeend", this[item.type].toHTML());
-
   }
 }
