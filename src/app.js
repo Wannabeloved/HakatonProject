@@ -1,6 +1,7 @@
 import "./styles.css";
 import { ContextMenu } from "./contextmenu";
 import { CountdownTimer } from "./modules/countdownTimer.module";
+import { BackgroundModule } from "./modules/background.module";
 
 console.log("Hello World!");
 
@@ -17,5 +18,11 @@ window.addEventListener("contextmenu", (e) => {
     type: "countdown",
     text: "Запустить таймер отсчета",
     module: new CountdownTimer("countdown", "Запустить таймер отсчета"),
+  });
+
+  menu.add({
+    type: "background",
+    text: "Сменить цвет фона",
+    module: new BackgroundModule("background", "Сменить цвет фона"),
   });
 });
