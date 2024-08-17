@@ -18,7 +18,7 @@ export class ContextMenu extends Menu {
 
   add(item) {
     let menuItem = document.createElement("li");
-    menuItem.textContent = item.text;
+    menuItem.textContent = item.module.text;
     menuItem.classList.add("menu-item");
     menuItem.addEventListener("click", () => {
       item.module.trigger();
