@@ -6,14 +6,34 @@ export class ContextMenu extends Menu {
     this.selector = selector;
   }
 
-  open() {
-    console.log(this.selector);
+  open(coordinates) {
+    let width = this.el.offsetWidth;
+    this.el.classList.remove("open");
+    this.el.style.opacity = "0";
+
+    let { x: currentX, y: currentY } = coordinates;
+    const maximalX = window.innerWidth - width; // Так как я всё-равно не могу отображать меню поверх чего-то вроде девтулзов, то отслеживаем не ширину окна а ширину документа
+
+    console.log(this.el.offsetWidth);
+
+    if (currentX > maximalX) {
+      currentX = maximalX;
+    }
+    if (currentY < window.innerHeight / 2) {
+      this.el.style.top = `${currentY}px`;
+      this.el.style.bottom = "auto";
+      console.log("clg");
+    } else {
+      this.el.style.bottom = `${window.innerHeight - coordinates.y}px`;
+      this.el.style.top = "auto";
+    }
+
+    this.el.style.left = `${currentX}px`;
     this.el.classList.add("open");
-    console.log(this.el);
   }
 
   close() {
-    throw new Error(`"close" method should be implemented in Menu"`);
+    this.el.classList.remove("open");
   }
 
   add() {
