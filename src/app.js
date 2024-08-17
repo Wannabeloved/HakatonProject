@@ -22,3 +22,4 @@ window.addEventListener("contextmenu", (e) => {
     module: new BackgroundModule("background", "Сменить цвет фона"),
   });
 });
+// test
