@@ -19,3 +19,4 @@ window.addEventListener("contextmenu", (e) => {
     module: new CountdownTimer("countdown", "Запустить таймер отсчета"),
   });
 });
+// test
