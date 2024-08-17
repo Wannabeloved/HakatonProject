@@ -32,11 +32,19 @@ export class ContextMenu extends Menu {
     this.el.classList.add("open");
   }
 
+
   close() {
     this.el.classList.remove("open");
   }
 
-  add() {
-    throw new Error(`"add" method should be implemented in Menu"`);
+
+  add(item) {
+    let menuItem = document.createElement("li");
+    menuItem.textContent = item.text;
+    menuItem.classList.add("menu-item");
+    menuItem.addEventListener("click", () => {
+      item.module.trigger();
+    });
+    this.el.appendChild(menuItem);
   }
 }

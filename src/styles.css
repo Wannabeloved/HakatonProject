@@ -15,7 +15,9 @@ body {
 }
 
 .menu {
+
   position: absolute;
+
   z-index: 1000;
   width: 150px;
   background: #1b1a1a;
@@ -26,7 +28,9 @@ body {
 
 .menu.open {
   display: block;
+
   animation: showBlock 0.2s linear forwards;
+
 }
 
 .menu .menu-item {
@@ -42,6 +46,7 @@ body {
   background: #343434;
 }
 
+
 @keyframes showBlock {
   0% {
     opacity: 0;
@@ -50,3 +55,4 @@ body {
     opacity: 1;
   }
 }
+
