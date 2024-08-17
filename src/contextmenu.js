@@ -3,6 +3,7 @@ import { Menu } from "./core/menu";
 import { ClicksModule } from "./modules/clicks.module";
 import { CountdownTimer } from "./modules/countdownTimer.module";
 import { BackgroundModule } from "./modules/background.module";
+import { RandomMessage } from './modules/randommessage.module'
 
 const modules = [
   {
@@ -20,6 +21,11 @@ const modules = [
     text: "Случайный фон",
     module: BackgroundModule,
   },
+  {
+		type: 'background-module',
+		text: 'Случайное сообщение',
+		module: RandomMessage,
+	},
 ];
 
 export class ContextMenu extends Menu {
