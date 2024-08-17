@@ -59,7 +59,9 @@ export class ContextMenu extends Menu {
   }
 
   add(item) {
+
     this[item.type] = new item.module(item.type, item.text);
     this.el.insertAdjacentHTML("beforeend", this[item.type].toHTML());
+
   }
 }
