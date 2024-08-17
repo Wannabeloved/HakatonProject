@@ -1,8 +1,6 @@
 import "./styles.css";
 import { ContextMenu } from "./contextmenu";
 
-console.log("Hello World!");
-
 let menu = new ContextMenu("#menu"); // сюда будем передавать в качестве параметров инстансы наших модулей
 
 window.addEventListener("contextmenu", event => {

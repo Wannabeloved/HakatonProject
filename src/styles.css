@@ -20,8 +20,9 @@ body {
   width: 150px;
   background: #1b1a1a;
   border-radius: 5px;
-  display: none;
+  display: block;
   list-style: none;
+  opacity: 0;
 }
 
 .menu.open {

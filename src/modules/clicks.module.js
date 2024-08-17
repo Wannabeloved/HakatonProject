@@ -1,28 +1,22 @@
-import { Module } from '../core/module'
+import { Module } from "../core/module";
 
 export class ClicksModule extends Module {
-	constructor(type, text) {
-		super(type, text)
-		this.type = type
-		this.text = text
-	}
+  constructor(type, text) {
+    super(type, text);
+  }
 
-	trigger() {
-		let counter = 0
+  trigger() {
+    let counter = -1;
 
-		setTimeout(() => {
-			document.removeEventListener('click', increment)
-			alert(`Вы кликнули ${counter} раз!`)
-		}, 3000)
+    document.addEventListener("click", increment);
 
-		document.addEventListener('click', increment)
+    function increment() {
+      counter += 1;
+    }
 
-		function increment() {
-			counter += 1
-		}
-	}
-
-	toHTML() {
-		return `<li class="menu-item" data-type="${this.type}">${this.text}</li>`
-	}
+    setTimeout(() => {
+      document.removeEventListener("click", increment);
+      alert(`Вы кликнули ${counter} раз(а)!`);
+    }, 3000);
+  }
 }
