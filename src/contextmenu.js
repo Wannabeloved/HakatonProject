@@ -3,6 +3,7 @@ import { Menu } from "./core/menu";
 import { ClicksModule } from "./modules/clicks.module";
 import { CountdownTimer } from "./modules/countdownTimer.module";
 import { BackgroundModule } from "./modules/background.module";
+import { AudioModule } from "./modules/audio.module";
 
 const modules = [
   {
@@ -19,6 +20,11 @@ const modules = [
     type: "background-module",
     text: "Случайный фон",
     module: BackgroundModule,
+  },
+  {
+    type: "audio-module",
+    text: "Воспроизвести аудио",
+    module: AudioModule,
   },
 ];
 

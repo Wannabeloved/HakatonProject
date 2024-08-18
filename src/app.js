@@ -1,15 +1,11 @@
 import "./styles.css";
 import { ContextMenu } from "./contextmenu";
-import { CountdownTimer } from "./modules/countdownTimer.module";
-import { BackgroundModule } from "./modules/background.module";
 
-let menu = new ContextMenu("#menu"); // сюда будем передавать в качестве параметров инстансы наших модулей
-
+let menu = new ContextMenu("#menu");
 
 window.addEventListener("contextmenu", event => {
   event.preventDefault();
   if (event.target.offsetParent !== menu.el) {
     menu.open({ x: event.x, y: event.y });
   }
-
 });

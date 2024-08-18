@@ -3,9 +3,34 @@ import { Module } from "../core/module";
 export class CountdownTimer extends Module {
   constructor(type, text) {
     super(type, text);
+    this.isActive = false;
+  }
+
+  setTimer(timeInSeconds) {
+    this.isActive = true;
+
+    //  Объясню почему я так сделал:
+    // Дело в том, что если во время таймера запустить, к примеру, счётчик кликов, то когда счётчик кликов закончится и вылезет алерт - **новый** интервал не вызовется пока пользователь не примет модалку (а таймаут продолжит тикать даже при открытой модалке)
+    // + по логике счётчиков не может быть одновременно больше одного, а тогда лучше привязать счётчик к самому инстансу этого класса, а не к его методу trigger()
+    setTimeout(() => {
+      clearInterval(interval);
+      alert("Время истекло!");
+      document.body.removeChild(this.timerBlock);
+      this.isActive = false;
+    }, timeInSeconds * 1000 + 16);
+
+    this.timerBlock.textContent = `Осталось: ${timeInSeconds--} сек.`;
+    const interval = setInterval(() => {
+      this.timerBlock.textContent = `Осталось: ${timeInSeconds--} сек.`;
+    }, 1000);
   }
 
   trigger() {
+    if (this.isActive) {
+      console.log(`Не шали`);
+      return;
+    }
+
     const userTime = prompt("Введите время в секундах для таймера:");
     const timeInSeconds = parseInt(userTime);
 
@@ -14,32 +39,18 @@ export class CountdownTimer extends Module {
       return;
     }
 
-    const timerBlock = document.createElement("div");
-    timerBlock.style.position = "fixed";
-    timerBlock.style.bottom = "20px";
-    timerBlock.style.right = "20px";
-    timerBlock.style.padding = "10px";
-    timerBlock.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
-    timerBlock.style.color = "#fff";
-    timerBlock.style.fontSize = "16px";
-    timerBlock.style.borderRadius = "5px";
-    timerBlock.style.zIndex = "1000";
-    document.body.appendChild(timerBlock);
+    this.timerBlock = document.createElement("div");
+    this.timerBlock.style.position = "fixed";
+    this.timerBlock.style.bottom = "20px";
+    this.timerBlock.style.right = "20px";
+    this.timerBlock.style.padding = "10px";
+    this.timerBlock.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+    this.timerBlock.style.color = "#fff";
+    this.timerBlock.style.fontSize = "16px";
+    this.timerBlock.style.borderRadius = "5px";
+    this.timerBlock.style.zIndex = "1000";
+    document.body.appendChild(this.timerBlock);
 
-    let remainingTime = timeInSeconds;
-
-    const updateTimer = () => {
-      if (remainingTime > 0) {
-        timerBlock.textContent = `Осталось: ${remainingTime} сек.`;
-        remainingTime -= 1;
-      } else {
-        alert("Время истекло!");
-        document.body.removeChild(timerBlock);
-        clearInterval(timerInterval);
-      }
-    };
-
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
+    this.setTimer(timeInSeconds);
   }
 }
