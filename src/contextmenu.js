@@ -3,6 +3,7 @@ import { Menu } from "./core/menu";
 import { ClicksModule } from "./modules/clicks.module";
 import { CountdownTimer } from "./modules/countdownTimer.module";
 import { BackgroundModule } from "./modules/background.module";
+import { Custom } from "./modules/custom.module";
 import { AudioModule } from "./modules/audio.module";
 import { RandomMessage } from './modules/randommessage.module'
 
@@ -23,6 +24,11 @@ const modules = [
     module: BackgroundModule,
   },
   {
+    type: "custom-module",
+    text: "Кстомный модуль",
+    module: Custom,
+  },
+
     type: "audio-module",
     text: "Воспроизвести аудио",
     module: AudioModule,
@@ -38,11 +44,11 @@ export class ContextMenu extends Menu {
     super(selector);
     this.selector = selector;
 
-    modules.forEach(item => {
+    modules.forEach((item) => {
       this.add(item);
     });
 
-    this.el.addEventListener("click", event => {
+    this.el.addEventListener("click", (event) => {
       this[event.target.dataset.type].trigger();
     });
   }
