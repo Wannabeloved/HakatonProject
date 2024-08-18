@@ -95,6 +95,9 @@ export class Custom extends Module {
         correctAnswer: "Поддержу его и помогу чем смогу",
       },
     ];
+
+    this.pageContainer = document.querySelector(`.container`);
+
     this.currentQuestionIndex = 0;
     this.score = 0;
   }
@@ -116,6 +119,8 @@ export class Custom extends Module {
     $gameContainer.style.boxSizing = "border-box";
     $gameContainer.style.fontSize = "18px";
     $gameContainer.style.textAlign = "center";
+
+    this.pageContainer.style.display = "none";
 
     document.body.appendChild($gameContainer);
 
@@ -181,7 +186,8 @@ export class Custom extends Module {
       this.currentQuestionIndex = 0;
       this.score = 0;
       container.remove();
-      document.body.style.backgroundColor = "";
+      document.body.style.backgroundColor = "#1b1a1a";
+      this.pageContainer.style.display = "block";
     });
 
     container.appendChild($exitButton);

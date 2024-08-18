@@ -41,8 +41,8 @@ export class CountdownTimer extends Module {
 
     this.timerBlock = document.createElement("div");
     this.timerBlock.style.position = "fixed";
-    this.timerBlock.style.bottom = "20px";
-    this.timerBlock.style.right = "20px";
+    this.timerBlock.style.bottom = "40px";
+    this.timerBlock.style.right = "40px";
     this.timerBlock.style.padding = "10px";
     this.timerBlock.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
     this.timerBlock.style.color = "#fff";

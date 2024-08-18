@@ -5,38 +5,39 @@ import { CountdownTimer } from "./modules/countdownTimer.module";
 import { BackgroundModule } from "./modules/background.module";
 import { Custom } from "./modules/custom.module";
 import { AudioModule } from "./modules/audio.module";
-import { RandomMessage } from './modules/randommessage.module'
+import { RandomMessage } from "./modules/randommessage.module";
 
 const modules = [
   {
-    type: "clicks-module",
+    type: "clicks_module",
     text: "Считать клики (за 3 секунды)",
     module: ClicksModule,
   },
   {
-    type: "timer-module",
+    type: "timer_module",
     text: "Таймер",
     module: CountdownTimer,
   },
   {
-    type: "background-module",
+    type: "background_module",
     text: "Случайный фон",
     module: BackgroundModule,
   },
   {
-    type: "custom-module",
-    text: "Кстомный модуль",
+    type: "blade-runner-game_module",
+    text: "Тест на репликанта",
     module: Custom,
   },
-
-    type: "audio-module",
-    text: "Воспроизвести аудио",
+  {
+    type: "audio_module",
+    text: "Случайный звук",
     module: AudioModule,
   },
-		type: 'background-module',
-		text: 'Случайное сообщение',
-		module: RandomMessage,
-	},
+  {
+    type: "random-mesage_module",
+    text: "Случайное сообщение",
+    module: RandomMessage,
+  },
 ];
 
 export class ContextMenu extends Menu {
@@ -44,11 +45,11 @@ export class ContextMenu extends Menu {
     super(selector);
     this.selector = selector;
 
-    modules.forEach((item) => {
+    modules.forEach(item => {
       this.add(item);
     });
 
-    this.el.addEventListener("click", (event) => {
+    this.el.addEventListener("click", event => {
       this[event.target.dataset.type].trigger();
     });
   }

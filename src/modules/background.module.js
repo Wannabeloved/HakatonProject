@@ -13,7 +13,8 @@ export class BackgroundModule extends Module {
 
     const color = `rgb(${r}, ${g}, ${b})`;
 
-    document.body.style.backgroundColor = color;
+    let container = document.querySelector(`.container`);
+    container.style.setProperty("--dot-bg", color);
 
     console.log(`Цвет фона изменен на: ${color}`);
   }
