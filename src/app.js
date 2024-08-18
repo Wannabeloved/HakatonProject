@@ -1,14 +1,11 @@
 import "./styles.css";
 import { ContextMenu } from "./contextmenu";
 
-console.log("Hello World!");
-
 let menu = new ContextMenu("#menu");
 
-const cm = document.querySelector(".custom-cm");
-
-window.addEventListener("contextmenu", e => {
-  e.preventDefault();
-
-  menu.open();
+window.addEventListener("contextmenu", event => {
+  event.preventDefault();
+  if (event.target.offsetParent !== menu.el) {
+    menu.open({ x: event.x, y: event.y });
+  }
 });
