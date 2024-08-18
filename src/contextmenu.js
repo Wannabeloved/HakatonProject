@@ -4,6 +4,7 @@ import { ClicksModule } from "./modules/clicks.module";
 import { CountdownTimer } from "./modules/countdownTimer.module";
 import { BackgroundModule } from "./modules/background.module";
 import { AudioModule } from "./modules/audio.module";
+import { RandomMessage } from './modules/randommessage.module'
 
 const modules = [
   {
@@ -26,6 +27,10 @@ const modules = [
     text: "Воспроизвести аудио",
     module: AudioModule,
   },
+		type: 'background-module',
+		text: 'Случайное сообщение',
+		module: RandomMessage,
+	},
 ];
 
 export class ContextMenu extends Menu {
